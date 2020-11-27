@@ -39,8 +39,8 @@ $(function () {
                     return layer.msg(res.message)
                 }
                 layer.msg(res.message)
-                $('#form-reg')[0].reset()
                 $('#link-login').click()
+                $('#form-reg')[0].reset()
             }
         })
     })
@@ -50,17 +50,14 @@ $(function () {
         $.ajax({
             method: 'POST',
             url: '/api/login',
-            data: {
-                username: $('.login-box [name=username]').val(),
-                password: $('.login-box [name=password]').val()
-            },
+            data: $(this).serialize(),
             success: function (res) {
                 console.log(res);
                 if(res.status !== 0 ) {
                     return layer.msg(res.message)
                 }
                 layer.msg(res.message)
-                localStorage.getItem('token',res.token)
+                localStorage.setItem('token',res.token)
                 location.href = '/index.html'
             }
         })
